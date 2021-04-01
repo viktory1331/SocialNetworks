@@ -1,1 +1,12 @@
+.postsBlock {
+  padding: 10px;
+}
 
+h3 {
+  font-weight: 660;
+  color: rgb(43, 40, 40);
+}
+
+.posts {
+  margin-top: 10px;
+}

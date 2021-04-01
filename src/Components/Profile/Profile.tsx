@@ -1,6 +1,7 @@
 import React from 'react';
 import { MyPosts } from './MyPosts/MyPosts';
 import s from './Profile.module.css';
+import { ProfileInfo } from './ProfileInfo/ProfileInfo';
 
 let pr = {
   content: 'Profile_content__NsTjM',
@@ -10,10 +11,7 @@ let pr = {
 export const Profile = () => {
   return (
     <div>
-      <div>
-        <img src="https://cdn.pixabay.com/photo/2015/09/09/16/05/forest-931706__340.jpg" />
-      </div>
-      <div>картинОчка</div>
+      <ProfileInfo />
       <MyPosts />
     </div>
   );
