@@ -19,12 +19,15 @@ function App(props: any) {
           <Route
             path="/dialogs"
             render={() => (
-              <Dialogs dialogs={props.dialogs} messages={props.messages} />
+              <Dialogs
+                data={props.state.messagesPage}
+                // messages={props.state.messagesPage.messages}
+              />
             )}
           />
           <Route
             path="/profile"
-            render={() => <Profile posts={props.posts} />}
+            render={() => <Profile state={props.state.dialogsPage} />}
           />
           <Route path="/music" render={() => <Music />} />
           <Route path="/news" render={() => <News />} />
