@@ -1,4 +1,5 @@
 import React from 'react';
+import { isPropertySignature } from 'typescript';
 import { MyPosts } from './MyPosts/MyPosts';
 import s from './Profile.module.css';
 import { ProfileInfo } from './ProfileInfo/ProfileInfo';
@@ -8,11 +9,11 @@ let pr = {
   item: 'Profile_item__27LSv',
 };
 
-export const Profile = () => {
+export const Profile = (props: any) => {
   return (
     <div>
       <ProfileInfo />
-      <MyPosts />
+      <MyPosts posts={props.posts} />
     </div>
   );
 };
