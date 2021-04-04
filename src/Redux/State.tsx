@@ -1,15 +1,41 @@
 import React from 'react';
 
-export let state = {
-  dialogsPage: {
+type messagePropsType = {
+  id: number;
+  message: String;
+};
+type dialogsPropsType = {
+  id: number;
+  name: String;
+};
+type postPropsType = {
+  id: number;
+  message: String;
+  numberOfLike: string;
+};
+type profilePageType = {
+  posts: Array<postPropsType>;
+};
+type dialogsPageType = {
+  dialogs: Array<dialogsPropsType>;
+  messages: Array<messagePropsType>;
+};
+type sidebarType = {};
+type rootStateType = {
+  profilePage: profilePageType;
+  dialogsPage: dialogsPageType;
+  sidebar: sidebarType;
+};
+
+let state: rootStateType = {
+  profilePage: {
     posts: [
       { id: 1, message: 'Hi', numberOfLike: '2 likes' },
       { id: 2, message: 'I am cat', numberOfLike: '5 likes' },
       { id: 2, message: 'Mяу', numberOfLike: '10 likes' },
-    ]
-   
+    ],
   },
-  messagesPage: {
+  dialogsPage: {
     messages: [
       { id: 1, message: 'Hi!' },
       { id: 2, message: 'Do u know IT-KAMASUTRA?' },
@@ -25,6 +51,9 @@ export let state = {
       { id: 4, name: 'Alisa' },
       { id: 5, name: 'Nastya' },
       { id: 6, name: 'Luis' },
-    ]
-  }
+    ],
+  },
+  sidebar: {},
 };
+
+export default state;
