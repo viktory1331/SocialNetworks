@@ -1,5 +1,6 @@
 import React from 'react';
 import { isPropertySignature } from 'typescript';
+import { ProfilePageType } from '../../Redux/State';
 import { MyPosts } from './MyPosts/MyPosts';
 import s from './Profile.module.css';
 import { ProfileInfo } from './ProfileInfo/ProfileInfo';
@@ -9,11 +10,15 @@ let pr = {
   item: 'Profile_item__27LSv',
 };
 
-export const Profile = (props: any) => {
+type ProfilePropsType = {
+  profilePage: ProfilePageType;
+};
+
+export const Profile = (props: ProfilePropsType) => {
   return (
     <div>
       <ProfileInfo />
-      <MyPosts posts={props.state.posts} />
+      <MyPosts posts={props.profilePage.posts} />
     </div>
   );
 };

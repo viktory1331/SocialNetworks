@@ -1,33 +1,33 @@
 import React from 'react';
 
-type messagePropsType = {
-  id: number;
+export type MessagePropsType = {
   message: String;
-};
-type dialogsPropsType = {
   id: number;
-  name: String;
 };
-type postPropsType = {
+export type DialogsPropsType = {
+  id: number;
+  name: string;
+};
+export type PostPropsType = {
   id: number;
   message: String;
   numberOfLike: string;
 };
-type profilePageType = {
-  posts: Array<postPropsType>;
+export type ProfilePageType = {
+  posts: Array<PostPropsType>;
 };
-type dialogsPageType = {
-  dialogs: Array<dialogsPropsType>;
-  messages: Array<messagePropsType>;
+export type DialogsPageType = {
+  dialogs: Array<DialogsPropsType>;
+  messages: Array<MessagePropsType>;
 };
-type sidebarType = {};
-type rootStateType = {
-  profilePage: profilePageType;
-  dialogsPage: dialogsPageType;
-  sidebar: sidebarType;
+type SidebarType = {};
+type RootStateType = {
+  profilePage: ProfilePageType;
+  dialogsPage: DialogsPageType;
+  sidebar: SidebarType;
 };
 
-let state: rootStateType = {
+let state: RootStateType = {
   profilePage: {
     posts: [
       { id: 1, message: 'Hi', numberOfLike: '2 likes' },
