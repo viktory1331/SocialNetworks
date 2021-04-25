@@ -9,10 +9,10 @@ type PropsType = {
 };
 export const Dialogs = (props: PropsType) => {
   debugger;
-  let dialogsElement = props.dialogsPage.dialogs.map((d: any) => (
+  let dialogsElement = props.dialogsPage.dialogs.map((d) => (
     <DialogItem name={d.name} id={d.id} />
   ));
-  let messagesElement = props.dialogsPage.messages.map((m: any) => (
+  let messagesElement = props.dialogsPage.messages.map((m) => (
     <Message message={m.message} id={m.id} />
   ));
 

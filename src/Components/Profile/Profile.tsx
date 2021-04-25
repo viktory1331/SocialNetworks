@@ -12,6 +12,7 @@ let pr = {
 
 type ProfilePropsType = {
   profilePage: ProfilePageType;
+  addPost: (postText: string) => void;
 };
 
 export const Profile = (props: ProfilePropsType) => {

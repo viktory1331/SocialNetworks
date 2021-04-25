@@ -5,22 +5,35 @@ import { Post, PostPropsType } from './Post/Post';
 
 type MyPostsPropsType = {
   profilePage: ProfilePageType;
+  addPost: () => void;
 };
 
 export const MyPosts = (props: ProfilePageType) => {
-  let postsElement = props.posts.map((p: any) => (
+  let postsElement = props.posts.map((p) => (
     <Post message={p.message} numberOfLike={p.numberOfLike} />
   ));
+
+  const newPostElement = React.createRef<HTMLTextAreaElement>();
+
+  const addPost = () => {
+    alert(newPostElement.current?.value);
+  };
 
   return (
     <div className={s.postsBlock}>
       <h3>My Posts</h3>
       <div>
         <div>
-          <textarea></textarea>
+          <textarea ref={newPostElement}></textarea>
         </div>
         <div>
-          <button>Add Post</button>
+          <button
+            onClick={() => {
+              addPost();
+            }}
+          >
+            Add Post
+          </button>
         </div>
       </div>
       <div className={s.posts}>{postsElement}</div>

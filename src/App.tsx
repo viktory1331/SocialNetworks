@@ -8,6 +8,7 @@ import { Navbar } from './Components/Navbar/Navbar';
 import { News } from './Components/News/News';
 import { Profile } from './Components/Profile/Profile';
 import { Settings } from './Components/Settings/Settings';
+import { addPost } from './Redux/State';
 
 function App(props: any) {
   return (
@@ -21,7 +22,9 @@ function App(props: any) {
         />
         <Route
           path="/profile"
-          render={() => <Profile profilePage={props.state.profilePage} />}
+          render={() => (
+            <Profile profilePage={props.state.profilePage} addPost={addPost} />
+          )}
         />
         <Route path="/music" render={() => <Music />} />
         <Route path="/news" render={() => <News />} />

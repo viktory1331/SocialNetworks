@@ -1,7 +1,7 @@
 import React from 'react';
 
 export type MessagePropsType = {
-  message: String;
+  message: string;
   id: number;
 };
 export type DialogsPropsType = {
@@ -10,7 +10,7 @@ export type DialogsPropsType = {
 };
 export type PostPropsType = {
   id: number;
-  message: String;
+  message: string;
   numberOfLike: string;
 };
 export type ProfilePageType = {
@@ -54,6 +54,15 @@ let state: RootStateType = {
     ],
   },
   sidebar: {},
+};
+
+export const addPost = (postText: string) => {
+  const newPost: PostPropsType = {
+    id: new Date().getTime(),
+    message: postText,
+    numberOfLike: '0',
+  };
+  state.profilePage.posts.push(newPost);
 };
 
 export default state;
