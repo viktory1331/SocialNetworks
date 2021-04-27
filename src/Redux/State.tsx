@@ -1,4 +1,5 @@
 import React from 'react';
+import { rerenderEntireTree } from '../render';
 
 export type MessagePropsType = {
   message: string;
@@ -15,13 +16,14 @@ export type PostPropsType = {
 };
 export type ProfilePageType = {
   posts: Array<PostPropsType>;
+  newPostText: string;
 };
 export type DialogsPageType = {
   dialogs: Array<DialogsPropsType>;
   messages: Array<MessagePropsType>;
 };
 type SidebarType = {};
-type RootStateType = {
+export type RootStateType = {
   profilePage: ProfilePageType;
   dialogsPage: DialogsPageType;
   sidebar: SidebarType;
@@ -34,6 +36,7 @@ let state: RootStateType = {
       { id: 2, message: 'I am cat', numberOfLike: '5 likes' },
       { id: 2, message: 'Mяу', numberOfLike: '10 likes' },
     ],
+    newPostText: 'It-kamasutra',
   },
   dialogsPage: {
     messages: [
@@ -56,13 +59,20 @@ let state: RootStateType = {
   sidebar: {},
 };
 
-export const addPost = (postText: string) => {
+export const addPost = () => {
   const newPost: PostPropsType = {
     id: new Date().getTime(),
-    message: postText,
+    message: state.profilePage.newPostText,
     numberOfLike: '0',
   };
   state.profilePage.posts.push(newPost);
+  state.profilePage.newPostText = '';
+  rerenderEntireTree(state);
+};
+
+export const UpdateNewPostText = (newText: string) => {
+  state.profilePage.newPostText = newText;
+  rerenderEntireTree(state);
 };
 
 export default state;

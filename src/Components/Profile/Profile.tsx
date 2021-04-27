@@ -12,14 +12,20 @@ let pr = {
 
 type ProfilePropsType = {
   profilePage: ProfilePageType;
-  addPost: (postText: string) => void;
+  addPost: () => void;
+  UpdateNewPostText: (newText: string | undefined) => void;
 };
 
 export const Profile = (props: ProfilePropsType) => {
   return (
     <div>
       <ProfileInfo />
-      <MyPosts posts={props.profilePage.posts} />
+      <MyPosts
+        posts={props.profilePage.posts}
+        newPostText={props.profilePage.newPostText}
+        UpdateNewPostText={props.UpdateNewPostText}
+        addPost={props.addPost}
+      />
     </div>
   );
 };

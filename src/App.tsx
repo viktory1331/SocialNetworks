@@ -23,7 +23,11 @@ function App(props: any) {
         <Route
           path="/profile"
           render={() => (
-            <Profile profilePage={props.state.profilePage} addPost={addPost} />
+            <Profile
+              profilePage={props.state.profilePage}
+              addPost={props.addPost}
+              UpdateNewPostText={props.UpdateNewPostText}
+            />
           )}
         />
         <Route path="/music" render={() => <Music />} />

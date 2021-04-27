@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { ProfilePageType } from '../../../Redux/State';
 import s from './MyPosts.module.css';
 import { Post, PostPropsType } from './Post/Post';
 
 type MyPostsPropsType = {
-  profilePage: ProfilePageType;
   addPost: () => void;
+  UpdateNewPostText: (text: string | undefined) => void;
+  posts: Array<PostPropsType>;
+  newPostText: string;
 };
 
-export const MyPosts = (props: ProfilePageType) => {
+export const MyPosts = (props: MyPostsPropsType) => {
   let postsElement = props.posts.map((p) => (
     <Post message={p.message} numberOfLike={p.numberOfLike} />
   ));
@@ -16,7 +18,13 @@ export const MyPosts = (props: ProfilePageType) => {
   const newPostElement = React.createRef<HTMLTextAreaElement>();
 
   const addPost = () => {
-    alert(newPostElement.current?.value);
+    props.addPost();
+    props.UpdateNewPostText('');
+  };
+
+  const onPostChange = () => {
+    let text = newPostElement.current?.value;
+    props.UpdateNewPostText(text);
   };
 
   return (
@@ -24,7 +32,11 @@ export const MyPosts = (props: ProfilePageType) => {
       <h3>My Posts</h3>
       <div>
         <div>
-          <textarea ref={newPostElement}></textarea>
+          <textarea
+            ref={newPostElement}
+            onChange={onPostChange}
+            value={props.newPostText}
+          />
         </div>
         <div>
           <button
