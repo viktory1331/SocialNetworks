@@ -1,5 +1,8 @@
 import React from 'react';
-import { rerenderEntireTree } from '../render';
+
+let rerenderEntireTree = (state: RootStateType) => {
+  console.log('stage changed');
+};
 
 export type MessagePropsType = {
   message: string;
@@ -73,6 +76,11 @@ export const addPost = () => {
 export const UpdateNewPostText = (newText: string) => {
   state.profilePage.newPostText = newText;
   rerenderEntireTree(state);
+};
+
+///needed fixing any
+export const subscribe = (observer: any) => {
+  rerenderEntireTree = observer;
 };
 
 export default state;
