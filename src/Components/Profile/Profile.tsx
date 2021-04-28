@@ -13,7 +13,7 @@ let pr = {
 type ProfilePropsType = {
   profilePage: ProfilePageType;
   addPost: () => void;
-  UpdateNewPostText: (newText: string) => void;
+  updateNewPostText: (newText: string) => void;
 };
 
 export const Profile = (props: ProfilePropsType) => {
@@ -23,7 +23,7 @@ export const Profile = (props: ProfilePropsType) => {
       <MyPosts
         posts={props.profilePage.posts}
         newPostText={props.profilePage.newPostText}
-        UpdateNewPostText={props.UpdateNewPostText}
+        updateNewPostText={props.updateNewPostText}
         addPost={props.addPost}
       />
     </div>

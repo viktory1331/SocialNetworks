@@ -8,13 +8,13 @@ import { Navbar } from './Components/Navbar/Navbar';
 import { News } from './Components/News/News';
 import { Profile } from './Components/Profile/Profile';
 import { Settings } from './Components/Settings/Settings';
-import { addPost, RootStateType } from './Redux/State';
+import { RootStateType } from './Redux/State';
 
 type AppType = {
-  state: RootStateType
-  addPost: () => void
-  UpdateNewPostText: (newText: string) => void
-}
+  state: RootStateType;
+  addPost: () => void;
+  updateNewPostText: (newText: string) => void;
+};
 function App(props: AppType) {
   return (
     <div className="app-wrapper">
@@ -24,14 +24,14 @@ function App(props: AppType) {
         <Route
           path="/dialogs"
           render={() => <Dialogs dialogsPage={props.state.dialogsPage} />}
-        />  
+        />
         <Route
           path="/profile"
           render={() => (
             <Profile
               profilePage={props.state.profilePage}
               addPost={props.addPost}
-              UpdateNewPostText={props.UpdateNewPostText}
+              updateNewPostText={props.updateNewPostText}
             />
           )}
         />
