@@ -5,7 +5,7 @@ import { Post, PostPropsType } from './Post/Post';
 
 type MyPostsPropsType = {
   addPost: () => void;
-  UpdateNewPostText: (text: string | undefined) => void;
+  UpdateNewPostText: (newText: string) => void;
   posts: Array<PostPropsType>;
   newPostText: string;
 };
@@ -23,8 +23,10 @@ export const MyPosts = (props: MyPostsPropsType) => {
   };
 
   const onPostChange = () => {
-    let text = newPostElement.current?.value;
-    props.UpdateNewPostText(text);
+    if (newPostElement.current) {
+      let text = newPostElement.current.value;
+      props.UpdateNewPostText(text);
+    }
   };
 
   return (

@@ -13,7 +13,7 @@ let pr = {
 type ProfilePropsType = {
   profilePage: ProfilePageType;
   addPost: () => void;
-  UpdateNewPostText: (newText: string | undefined) => void;
+  UpdateNewPostText: (newText: string) => void;
 };
 
 export const Profile = (props: ProfilePropsType) => {

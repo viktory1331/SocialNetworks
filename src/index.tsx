@@ -14,7 +14,7 @@ export const rerenderEntireTree = (state: RootStateType) => {
         <App
           state={state}
           addPost={addPost}
-          UpdateNewPostTex={UpdateNewPostText}
+          UpdateNewPostText={UpdateNewPostText}
         />
       </BrowserRouter>
     </React.StrictMode>,
