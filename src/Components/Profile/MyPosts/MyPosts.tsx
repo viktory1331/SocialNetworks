@@ -9,8 +9,6 @@ import s from './MyPosts.module.css';
 import { Post, PostPropsType } from './Post/Post';
 
 type MyPostsPropsType = {
-  // addPost: () => void;
-  // updateNewPostText: (newText: string) => void;
   dispatch: (action: ActionsTypes) => void;
   posts: Array<PostPropsType>;
   newPostText: string;

@@ -8,7 +8,7 @@ import { Navbar } from './Components/Navbar/Navbar';
 import { News } from './Components/News/News';
 import { Profile } from './Components/Profile/Profile';
 import { Settings } from './Components/Settings/Settings';
-import { ActionsTypes, RootStateType } from './Redux/State';
+import store, { ActionsTypes, RootStateType } from './Redux/State';
 
 type AppType = {
   state: RootStateType;
@@ -22,7 +22,12 @@ function App(props: AppType) {
       <div className="app-wrapper-content">
         <Route
           path="/dialogs"
-          render={() => <Dialogs dialogsPage={props.state.dialogsPage} />}
+          render={() => (
+            <Dialogs
+              dispatch={props.dispatch}
+              dialogsPage={props.state.dialogsPage}
+            />
+          )}
         />
         <Route
           path="/profile"
