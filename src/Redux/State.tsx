@@ -30,29 +30,52 @@ let store = {
     },
     sidebar: {},
   },
-  getState() {
-    return this._state;
-  },
   _callSubscriber(state: RootStateType) {
     console.log('stage changed');
   },
-  addPost() {
-    const newPost: PostPropsType = {
-      id: new Date().getTime(),
-      message: this._state.profilePage.newPostText,
-      numberOfLike: '0',
-    };
-    this._state.profilePage.posts.push(newPost);
-    this._state.profilePage.newPostText = '';
-    this._callSubscriber(this._state);
-  },
-  updateNewPostText(newText: string) {
-    this._state.profilePage.newPostText = newText;
-    this._callSubscriber(this._state);
+  getState() {
+    return this._state;
   },
   subscribe(observer: any) {
     this._callSubscriber = observer;
   },
+  dispatch(action: ActionsTypes) {
+    if (action.type === 'ADD-POST') {
+      const newPost: PostPropsType = {
+        id: new Date().getTime(),
+        message: this._state.profilePage.newPostText,
+        numberOfLike: '0',
+      };
+      this._state.profilePage.posts.push(newPost);
+      this._state.profilePage.newPostText = '';
+      this._callSubscriber(this._state);
+    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+      this._state.profilePage.newPostText = action.newText;
+      this._callSubscriber(this._state);
+    }
+  },
+};
+
+export type ActionsTypes =
+  | ReturnType<typeof addPostAC>
+  | ReturnType<typeof updatePostTextAC>;
+
+type AddPostActionType = ReturnType<typeof addPostAC>;
+
+type UpdateNewTextActionType = ReturnType<typeof updatePostTextAC>;
+
+export const addPostAC = (newPostText: string) => {
+  return {
+    type: 'ADD-POST',
+    newPostText: newPostText,
+  } as const;
+};
+
+export const updatePostTextAC = (newText: string) => {
+  return {
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: newText,
+  } as const;
 };
 
 export type MessagePropsType = {

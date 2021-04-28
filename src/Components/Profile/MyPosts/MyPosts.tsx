@@ -1,11 +1,17 @@
 import React, { ChangeEvent } from 'react';
-import { ProfilePageType } from '../../../Redux/State';
+import {
+  ActionsTypes,
+  addPostAC,
+  ProfilePageType,
+  updatePostTextAC,
+} from '../../../Redux/State';
 import s from './MyPosts.module.css';
 import { Post, PostPropsType } from './Post/Post';
 
 type MyPostsPropsType = {
-  addPost: () => void;
-  updateNewPostText: (newText: string) => void;
+  // addPost: () => void;
+  // updateNewPostText: (newText: string) => void;
+  dispatch: (action: ActionsTypes) => void;
   posts: Array<PostPropsType>;
   newPostText: string;
 };
@@ -18,14 +24,13 @@ export const MyPosts = (props: MyPostsPropsType) => {
   const newPostElement = React.createRef<HTMLTextAreaElement>();
 
   const addPost = () => {
-    props.addPost();
-    props.updateNewPostText('');
+    props.dispatch(addPostAC(props.newPostText));
   };
 
   const onPostChange = () => {
     if (newPostElement.current) {
       let text = newPostElement.current.value;
-      props.updateNewPostText(text);
+      props.dispatch(updatePostTextAC(text));
     }
   };
 
@@ -34,11 +39,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
       <h3>My Posts</h3>
       <div>
         <div>
-          <textarea
-            ref={newPostElement}
-            onChange={onPostChange}
-            value={props.newPostText}
-          />
+          <textarea ref={newPostElement} onChange={onPostChange} />
         </div>
         <div>
           <button
