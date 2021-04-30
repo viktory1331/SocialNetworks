@@ -6,7 +6,7 @@ import {
   ActionsTypes,
   DialogsPageType,
   RootStateType,
-} from '../../Redux/State';
+} from '../../Redux/store';
 import {
   sendMessageAC,
   updateBodyOfNewMessageAC,

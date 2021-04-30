@@ -1,6 +1,6 @@
 import React from 'react';
 import { isPropertySignature } from 'typescript';
-import { ActionsTypes, ProfilePageType } from '../../Redux/State';
+import { ActionsTypes, ProfilePageType } from '../../Redux/store';
 import { MyPosts } from './MyPosts/MyPosts';
 import s from './Profile.module.css';
 import { ProfileInfo } from './ProfileInfo/ProfileInfo';

@@ -8,7 +8,7 @@ import { Navbar } from './Components/Navbar/Navbar';
 import { News } from './Components/News/News';
 import { Profile } from './Components/Profile/Profile';
 import { Settings } from './Components/Settings/Settings';
-import store, { ActionsTypes, RootStateType } from './Redux/State';
+import store, { ActionsTypes, RootStateType } from './Redux/store';
 
 type AppType = {
   state: RootStateType;
