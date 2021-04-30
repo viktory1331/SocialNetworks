@@ -1,9 +1,11 @@
 import React from 'react';
-
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
-const SEND_MESSAGE = 'SEND-MESSAGE';
+import {
+  dialogsReducer,
+  sendMessageAC,
+  updateBodyOfNewMessageAC,
+} from './dialogs-reducer';
+import { addPostAC, profileReducer, updatePostTextAC } from './profile-reducer';
+import { sidebarReducer } from './sidebar-reducer';
 
 let store = {
   _state: {
@@ -46,27 +48,10 @@ let store = {
     this._callSubscriber = observer;
   },
   dispatch(action: ActionsTypes) {
-    if (action.type === ADD_POST) {
-      const newPost: PostPropsType = {
-        id: new Date().getTime(),
-        message: this._state.profilePage.newPostText,
-        numberOfLike: '0',
-      };
-      this._state.profilePage.posts.push(newPost);
-      this._state.profilePage.newPostText = '';
-      this._callSubscriber(this._state);
-    } else if (action.type === UPDATE_NEW_POST_TEXT) {
-      this._state.profilePage.newPostText = action.newText;
-      this._callSubscriber(this._state);
-    } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
-      this._state.dialogsPage.newMessageBody = action.body;
-      this._callSubscriber(this._state);
-    } else if (action.type === SEND_MESSAGE) {
-      let body = this._state.dialogsPage.newMessageBody;
-      this._state.dialogsPage.newMessageBody = '';
-      this._state.dialogsPage.messages.push({ id: 6, message: body });
-      this._callSubscriber(this._state);
-    }
+    profileReducer(this._state.profilePage, action);
+    dialogsReducer(this._state.dialogsPage, action);
+    sidebarReducer(this._state.sidebar, action);
+    this._callSubscriber(this._state);
   },
 };
 
@@ -82,31 +67,6 @@ type sendMessageCreator = ReturnType<typeof sendMessageAC>;
 type updateBodyOfNewMessageCreator = ReturnType<
   typeof updateBodyOfNewMessageAC
 >;
-
-export const addPostAC = (newPostText: string) => {
-  return {
-    type: 'ADD-POST',
-    newPostText: newPostText,
-  } as const;
-};
-export const updatePostTextAC = (newText: string) => {
-  return {
-    type: 'UPDATE-NEW-POST-TEXT',
-    newText: newText,
-  } as const;
-};
-export const sendMessageAC = (newMessageBody: string) => {
-  return {
-    type: SEND_MESSAGE,
-    newMessageBody: newMessageBody,
-  } as const;
-};
-export const updateBodyOfNewMessageAC = (body: string) => {
-  return {
-    type: UPDATE_NEW_MESSAGE_BODY,
-    body: body,
-  } as const;
-};
 
 export type MessagePropsType = {
   message: string;
@@ -130,7 +90,8 @@ export type DialogsPageType = {
   messages: Array<MessagePropsType>;
   newMessageBody: string;
 };
-type SidebarType = {};
+export type SidebarType = {};
+
 export type RootStateType = {
   profilePage: ProfilePageType;
   dialogsPage: DialogsPageType;

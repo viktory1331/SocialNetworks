@@ -6,17 +6,18 @@ import {
   ActionsTypes,
   DialogsPageType,
   RootStateType,
+} from '../../Redux/State';
+import {
   sendMessageAC,
   updateBodyOfNewMessageAC,
-} from '../../Redux/State';
+} from '../../Redux/dialogs-reducer';
 
 type PropsType = {
   dialogsPage: DialogsPageType;
   dispatch: (action: ActionsTypes) => void;
-  
 };
-export const Dialogs = (props: PropsType) => {
 
+export const Dialogs = (props: PropsType) => {
   let dialogsElement = props.dialogsPage.dialogs.map((d) => (
     <DialogItem name={d.name} id={d.id} />
   ));
