@@ -18,7 +18,6 @@ export const MyPostsContainer = (props: MyPostsPropsType) => {
   };
 
   const onPostChange = (text: string) => {
-    //let text = newPostElement.current.value;
     props.dispatch(updatePostTextAC(text));
   };
 

@@ -16,7 +16,6 @@ let pr = {
 
 type ProfilePropsType = {
   state: RootStateType;
-  //profilePage: ProfilePageType;
   dispatch: (action: ActionsTypes) => void;
 };
 
