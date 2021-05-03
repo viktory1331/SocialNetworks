@@ -1,7 +1,11 @@
 import React from 'react';
 import { isPropertySignature } from 'typescript';
-import { ActionsTypes, ProfilePageType } from '../../Redux/store';
-import { MyPosts } from './MyPosts/MyPosts';
+import {
+  ActionsTypes,
+  ProfilePageType,
+  RootStateType,
+} from '../../Redux/store';
+import { MyPostsContainer } from './MyPosts/MyPostsContainer';
 import s from './Profile.module.css';
 import { ProfileInfo } from './ProfileInfo/ProfileInfo';
 
@@ -11,7 +15,8 @@ let pr = {
 };
 
 type ProfilePropsType = {
-  profilePage: ProfilePageType;
+  state: RootStateType;
+  //profilePage: ProfilePageType;
   dispatch: (action: ActionsTypes) => void;
 };
 
@@ -19,11 +24,7 @@ export const Profile = (props: ProfilePropsType) => {
   return (
     <div>
       <ProfileInfo />
-      <MyPosts
-        posts={props.profilePage.posts}
-        newPostText={props.profilePage.newPostText}
-        dispatch={props.dispatch}
-      />
+      <MyPostsContainer state={props.state} dispatch={props.dispatch} />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
-import { Dialogs } from './Components/Dialogs/Dialogs';
+import { DialogsContainer } from './Components/Dialogs/DialogsContainer';
 import { Header } from './Components/Header/Header';
 import { Music } from './Components/Music/Music';
 import { Navbar } from './Components/Navbar/Navbar';
@@ -22,22 +22,9 @@ function App(props: AppType) {
       <div className="app-wrapper-content">
         <Route
           path="/dialogs"
-          render={() => (
-            <Dialogs
-              dispatch={props.dispatch}
-              dialogsPage={props.state.dialogsPage}
-            />
-          )}
+          render={() => <DialogsContainer state={props.state} dispatch={props.dispatch} />}
         />
-        <Route
-          path="/profile"
-          render={() => (
-            <Profile
-              profilePage={props.state.profilePage}
-              dispatch={props.dispatch}
-            />
-          )}
-        />
+        <Route path="/profile" render={() => <Profile state={props.state} dispatch={props.dispatch} />} />
         <Route path="/music" render={() => <Music />} />
         <Route path="/news" render={() => <News />} />
         <Route path="/settings" render={() => <Settings />} />

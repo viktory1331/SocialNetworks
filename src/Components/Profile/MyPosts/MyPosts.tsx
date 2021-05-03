@@ -5,7 +5,8 @@ import s from './MyPosts.module.css';
 import { Post, PostPropsType } from './Post/Post';
 
 type MyPostsPropsType = {
-  dispatch: (action: ActionsTypes) => void;
+  updatePostText: (text: string) => void;
+  addPost: () => void;
   posts: Array<PostPropsType>;
   newPostText: string;
 };
@@ -17,14 +18,14 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
   const newPostElement = React.createRef<HTMLTextAreaElement>();
 
-  const addPost = () => {
-    props.dispatch(addPostAC(props.newPostText));
+  const onAddPost = () => {
+    props.addPost();
   };
 
   const onPostChange = () => {
     if (newPostElement.current) {
       let text = newPostElement.current.value;
-      props.dispatch(updatePostTextAC(text));
+      props.updatePostText(text);
     }
   };
 
@@ -38,7 +39,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
         <div>
           <button
             onClick={() => {
-              addPost();
+              onAddPost();
             }}
           >
             Add Post

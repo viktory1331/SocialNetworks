@@ -14,26 +14,26 @@ import {
 
 type PropsType = {
   dialogsPage: DialogsPageType;
-  dispatch: (action: ActionsTypes) => void;
+  updateBodyOfNewMessage: (text: string) => void;
+  sendMessage: () => void;
 };
 
 export const Dialogs = (props: PropsType) => {
+  let state = props.dialogsPage;
+
   let dialogsElement = props.dialogsPage.dialogs.map((d) => (
     <DialogItem name={d.name} id={d.id} />
   ));
   let messagesElement = props.dialogsPage.messages.map((m) => (
     <Message message={m.message} id={m.id} />
   ));
-  // let newMessageBody = state.newMessageBody;
-  let newMessageBody = props.dialogsPage.newMessageBody;
 
   let onSendMessageClick = () => {
-    props.dispatch(sendMessageAC(props.dialogsPage.newMessageBody));
+    props.sendMessage();
   };
 
   let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    // let body = e.target.value;
-    props.dispatch(updateBodyOfNewMessageAC(e.target.value));
+    props.updateBodyOfNewMessage(e.target.value);
   };
 
   return (
@@ -45,7 +45,7 @@ export const Dialogs = (props: PropsType) => {
           <div>
             <textarea
               onChange={onNewMessageChange}
-              value={newMessageBody}
+              value={props.dialogsPage.newMessageBody}
               placeholder="Enter your message"
             ></textarea>
           </div>
