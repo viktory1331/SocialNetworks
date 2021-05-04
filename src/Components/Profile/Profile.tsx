@@ -14,16 +14,11 @@ let pr = {
   item: 'Profile_item__27LSv',
 };
 
-type ProfilePropsType = {
-  state: RootStateType;
-  dispatch: (action: ActionsTypes) => void;
-};
-
-export const Profile = (props: ProfilePropsType) => {
+export const Profile = () => {
   return (
     <div>
       <ProfileInfo />
-      <MyPostsContainer state={props.state} dispatch={props.dispatch} />
+      <MyPostsContainer />
     </div>
   );
 };

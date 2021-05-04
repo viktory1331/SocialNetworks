@@ -7,15 +7,11 @@ import {
   DialogsPageType,
   RootStateType,
 } from '../../Redux/store';
-import {
-  sendMessageAC,
-  updateBodyOfNewMessageAC,
-} from '../../Redux/dialogs-reducer';
 
 type PropsType = {
   dialogsPage: DialogsPageType;
   updateBodyOfNewMessage: (text: string) => void;
-  sendMessage: () => void;
+  sendMessage: (newMessageBody: string) => void;
 };
 
 export const Dialogs = (props: PropsType) => {
@@ -29,7 +25,7 @@ export const Dialogs = (props: PropsType) => {
   ));
 
   let onSendMessageClick = () => {
-    props.sendMessage();
+    props.sendMessage(props.dialogsPage.newMessageBody);
   };
 
   let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {

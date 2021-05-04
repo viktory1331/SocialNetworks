@@ -8,23 +8,15 @@ import { Navbar } from './Components/Navbar/Navbar';
 import { News } from './Components/News/News';
 import { Profile } from './Components/Profile/Profile';
 import { Settings } from './Components/Settings/Settings';
-import store, { ActionsTypes, RootStateType } from './Redux/store';
 
-type AppType = {
-  state: RootStateType;
-  dispatch: (action: ActionsTypes) => void;
-};
-function App(props: AppType) {
+function App() {
   return (
     <div className="app-wrapper">
       <Header />
       <Navbar />
       <div className="app-wrapper-content">
-        <Route
-          path="/dialogs"
-          render={() => <DialogsContainer state={props.state} dispatch={props.dispatch} />}
-        />
-        <Route path="/profile" render={() => <Profile state={props.state} dispatch={props.dispatch} />} />
+        <Route path="/dialogs" render={() => <DialogsContainer />} />
+        <Route path="/profile" render={() => <Profile />} />
         <Route path="/music" render={() => <Music />} />
         <Route path="/news" render={() => <News />} />
         <Route path="/settings" render={() => <Settings />} />
