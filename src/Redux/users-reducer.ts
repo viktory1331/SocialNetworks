@@ -12,9 +12,12 @@ export type UserLocationType = {
 export type UserType = {
     id: number,
     followed: boolean,
-    fullName: string,
+    name: string,
     status: string,
-    photoUrl: string,
+    photos: {
+      small: string | undefined,
+      large: string | undefined,
+    },
     location: UserLocationType
 }
 
