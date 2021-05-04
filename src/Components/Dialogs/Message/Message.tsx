@@ -7,5 +7,10 @@ type MessagePropsType = {
 };
 
 export const Message = (props: MessagePropsType) => {
-  return <div className={s.message}>{props.message}</div>;
+  return (
+    <div className={s.message}>
+      <img src="https://ae01.alicdn.com/kf/Hc65aecefef3f40589c1adcbedf8f65e92/Hot-Sale-Hand-Knitted-Pet-Hats-Frog-Cat-Hat-For-Cat-Hat-Hairband-Cat-Cap-Green.jpg_q50.jpg" />
+      {props.message}
+    </div>
+  );
 };
