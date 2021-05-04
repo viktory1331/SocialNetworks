@@ -6,6 +6,7 @@ import {
 } from './dialogs-reducer';
 import { addPostAC, profileReducer, updatePostTextAC } from './profile-reducer';
 import { sidebarReducer } from './sidebar-reducer';
+import { followAC, setUsersAC, unfollowAC, usersReducer } from './users-reducer';
 
 let store = {
   _state: {
@@ -51,6 +52,7 @@ let store = {
     profileReducer(this._state.profilePage, action);
     dialogsReducer(this._state.dialogsPage, action);
     sidebarReducer(this._state.sidebar, action);
+    
     this._callSubscriber(this._state);
   },
 };
@@ -59,7 +61,10 @@ export type ActionsTypes =
   | ReturnType<typeof addPostAC>
   | ReturnType<typeof updatePostTextAC>
   | ReturnType<typeof sendMessageAC>
-  | ReturnType<typeof updateBodyOfNewMessageAC>;
+  | ReturnType<typeof updateBodyOfNewMessageAC>
+  | ReturnType <typeof followAC>
+  | ReturnType <typeof unfollowAC>
+  | ReturnType <typeof setUsersAC>
 
 type AddPostActionType = ReturnType<typeof addPostAC>;
 type UpdateNewTextActionType = ReturnType<typeof updatePostTextAC>;
