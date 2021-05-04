@@ -18,10 +18,10 @@ export const Dialogs = (props: PropsType) => {
   let state = props.dialogsPage;
 
   let dialogsElement = props.dialogsPage.dialogs.map((d) => (
-    <DialogItem name={d.name} id={d.id} />
+    <DialogItem name={d.name} id={d.id} key={d.id} />
   ));
   let messagesElement = props.dialogsPage.messages.map((m) => (
-    <Message message={m.message} id={m.id} />
+    <Message message={m.message} id={m.id} key={m.id} />
   ));
 
   let onSendMessageClick = () => {
