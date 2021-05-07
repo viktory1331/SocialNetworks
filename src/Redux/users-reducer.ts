@@ -3,6 +3,8 @@ import { PostPropsType, ActionsTypes, ProfilePageType } from './store';
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 
 export type UserLocationType = {
    city: string,
@@ -22,11 +24,17 @@ export type UserType = {
 }
 
 const initialState: InitialStateType = { 
-   users: []
+   users: [],
+   pageSize: 5,
+   totalUsersCount: 0,
+   currentPage: 2
 }
 
 export type InitialStateType = {
-   users: Array<UserType>
+   users: Array<UserType>,
+   pageSize: number,
+   totalUsersCount: number,
+   currentPage: number
 }
 
 export const usersReducer = (state: InitialStateType = initialState, action:ActionsTypes): InitialStateType => {
@@ -48,7 +56,13 @@ export const usersReducer = (state: InitialStateType = initialState, action:Acti
          })
       }
       case SET_USERS: {
-         return {...state, users: [...state.users, ...action.users]}
+         return {...state, users: action.users}
+      }
+      case SET_CURRENT_PAGE: {
+         return {...state, currentPage: action.currentPage}
+      }
+      case SET_TOTAL_USERS_COUNT: {
+         return {...state, totalUsersCount: action.totalUsersCount}
       }
       default:
          return state
@@ -73,3 +87,15 @@ export const usersReducer = (state: InitialStateType = initialState, action:Acti
         users
       } as const;
     };
+    export const setCurrentPageAC = (currentPage: number) => {
+       return {
+          type: 'SET_CURRENT_PAGE',
+          currentPage
+       } as const
+    }
+    export const setUsersTotalCountAC = (totalUsersCount: number) => {
+       return {
+          type: 'SET_TOTAL_USERS_COUNT',
+          totalUsersCount
+       } as const
+    }

@@ -5,26 +5,70 @@ import { UsersPropsType } from './UsersContainer';
 import userPhoto from '../../assets/Images/user.png';
 import { InitialStateType, UserType } from '../../Redux/users-reducer';
 import { RootStateType } from '../../Redux/store';
+import { runInThisContext } from 'node:vm';
 
 type usersPropsType = {
   follow: (userId: number) => void;
   unfollow: (userId: number) => void;
   usersPage: InitialStateType;
   setUser: (users: Array<UserType>) => void;
+  pageSize: number;
+  totalUsersCount: number;
+  currentPage: number;
+  setCurrentPage: (currentPage: number) => void;
+  setTotalUsersCounter: (totalUsersCount: number) => void;
 };
 
 export class Users extends React.Component<usersPropsType> {
   componentDidMount() {
     axios
-      .get('https://social-network.samuraijs.com/api/1.0//users')
+      .get(
+        `https://social-network.samuraijs.com/api/1.0//users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+      )
       .then((response) => {
         this.props.setUser(response.data.items);
+        this.props.setTotalUsersCounter(response.data.totalCount);
       });
   }
 
+  onPageChanged = (currentPage: number) => {
+    this.props.setCurrentPage(currentPage);
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0//users?page=${currentPage}&count=${this.props.pageSize}`
+      )
+      .then((response) => {
+        this.props.setUser(response.data.items);
+      });
+  };
+
   render() {
+    let pagesCount = Math.ceil(
+      this.props.totalUsersCount / this.props.pageSize
+    );
+
+    let pages = [];
+
+    for (let i = 1; i <= pagesCount; i++) {
+      pages.push(i);
+    }
+
     return (
       <div>
+        <div>
+          {pages.map((p) => {
+            return (
+              <span
+                className={this.props.currentPage === p ? s.selectedPage : ''}
+                onClick={(e: React.MouseEvent<HTMLSpanElement>) => {
+                  this.onPageChanged(p);
+                }}
+              >
+                {p}
+              </span>
+            );
+          })}
+        </div>
         {this.props.usersPage.users.map((u) => (
           <div key={u.id}>
             <span>
