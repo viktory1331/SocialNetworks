@@ -38,7 +38,7 @@ export class Users extends React.Component<usersPropsType> {
                 {u.followed ? (
                   <button
                     onClick={() => {
-                      this.props.follow(u.id);
+                      this.props.unfollow(u.id);
                     }}
                   >
                     Unfollow
@@ -46,7 +46,7 @@ export class Users extends React.Component<usersPropsType> {
                 ) : (
                   <button
                     onClick={() => {
-                      this.props.unfollow(u.id);
+                      this.props.follow(u.id);
                     }}
                   >
                     Follow
