@@ -1,13 +1,9 @@
-import axios from 'axios';
 import React from 'react';
-import s from './Users.module.css';
-import { UsersPropsType } from './UsersContainer';
-import userPhoto from '../../assets/Images/user.png';
 import { InitialStateType, UserType } from '../../Redux/users-reducer';
-import { RootStateType } from '../../Redux/store';
-import { runInThisContext } from 'node:vm';
+import userPhoto from '../../assets/Images/user.png';
+import s from './Users.module.css';
 
-type usersPropsType = {
+type UsersPropsType = {
   follow: (userId: number) => void;
   unfollow: (userId: number) => void;
   usersPage: InitialStateType;
@@ -15,102 +11,75 @@ type usersPropsType = {
   pageSize: number;
   totalUsersCount: number;
   currentPage: number;
-  setCurrentPage: (currentPage: number) => void;
-  setTotalUsersCounter: (totalUsersCount: number) => void;
+  onPageChanged: (currentPage: number) => void;
 };
 
-export class Users extends React.Component<usersPropsType> {
-  componentDidMount() {
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0//users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
-        this.props.setUser(response.data.items);
-        this.props.setTotalUsersCounter(response.data.totalCount);
-      });
+export let Users = (props: UsersPropsType) => {
+  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+
+  let pages = [];
+
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i);
   }
 
-  onPageChanged = (currentPage: number) => {
-    this.props.setCurrentPage(currentPage);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0//users?page=${currentPage}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
-        this.props.setUser(response.data.items);
-      });
-  };
-
-  render() {
-    let pagesCount = Math.ceil(
-      this.props.totalUsersCount / this.props.pageSize
-    );
-
-    let pages = [];
-
-    for (let i = 1; i <= pagesCount; i++) {
-      pages.push(i);
-    }
-
-    return (
+  return (
+    <div>
       <div>
-        <div>
-          {pages.map((p) => {
-            return (
-              <span
-                className={this.props.currentPage === p ? s.selectedPage : ''}
-                onClick={(e: React.MouseEvent<HTMLSpanElement>) => {
-                  this.onPageChanged(p);
-                }}
-              >
-                {p}
-              </span>
-            );
-          })}
-        </div>
-        {this.props.usersPage.users.map((u) => (
-          <div key={u.id}>
-            <span>
-              <div>
-                <img
-                  src={u.photos.small != null ? u.photos.small : userPhoto}
-                  className={s.userPhoto}
-                />
-              </div>
-              <div>
-                {u.followed ? (
-                  <button
-                    onClick={() => {
-                      this.props.unfollow(u.id);
-                    }}
-                  >
-                    Unfollow
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => {
-                      this.props.follow(u.id);
-                    }}
-                  >
-                    Follow
-                  </button>
-                )}
-              </div>
+        {pages.map((p) => {
+          return (
+            <span
+              className={props.currentPage === p ? s.selectedPage : ''}
+              onClick={(e: React.MouseEvent<HTMLSpanElement>) => {
+                props.onPageChanged(p);
+              }}
+            >
+              {p}
             </span>
-            <span>
-              <span>
-                <div>{u.name}</div>
-                <div>{u.status}</div>
-              </span>
-              <span>
-                <div>{'u.location.country'}</div>
-                <div>{'u.location.city'}</div>
-              </span>
-            </span>
-          </div>
-        ))}
+          );
+        })}
       </div>
-    );
-  }
-}
+      {props.usersPage.users.map((u) => (
+        <div key={u.id}>
+          <span>
+            <div>
+              <img
+                src={u.photos.small != null ? u.photos.small : userPhoto}
+                className={s.userPhoto}
+              />
+            </div>
+            <div>
+              {u.followed ? (
+                <button
+                  onClick={() => {
+                    props.unfollow(u.id);
+                  }}
+                >
+                  Unfollow
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    props.follow(u.id);
+                  }}
+                >
+                  Follow
+                </button>
+              )}
+            </div>
+          </span>
+          <span>
+            <span>
+              <div>{u.name}</div>
+              <div>{u.status}</div>
+            </span>
+            <span>
+              <div>{'u.location.country'}</div>
+              <div>{'u.location.city'}</div>
+            </span>
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+};
