@@ -12,6 +12,8 @@ type UsersPropsType = {
   totalUsersCount: number;
   currentPage: number;
   onPageChanged: (currentPage: number) => void;
+  isFetching: boolean;
+  toggleIsFetching: (isFetching: boolean) => void;
 };
 
 export let Users = (props: UsersPropsType) => {
