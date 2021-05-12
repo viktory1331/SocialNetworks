@@ -1,12 +1,6 @@
 import React from 'react';
-import { isPropertySignature } from 'typescript';
-import {
-  ActionsTypes,
-  ProfilePageType,
-  RootStateType,
-} from '../../Redux/store';
+import { InitialStateType, UserType } from '../../Redux/users-reducer';
 import { MyPostsContainer } from './MyPosts/MyPostsContainer';
-import s from './Profile.module.css';
 import { ProfileInfo } from './ProfileInfo/ProfileInfo';
 
 let pr = {
@@ -14,10 +8,14 @@ let pr = {
   item: 'Profile_item__27LSv',
 };
 
-export const Profile = () => {
+type ProfilePropsType = {
+  profile: UserType | null
+}
+
+export const Profile = (props: ProfilePropsType) => {
   return (
     <div>
-      <ProfileInfo />
+      <ProfileInfo profile={props.profile} />
       <MyPostsContainer />
     </div>
   );
