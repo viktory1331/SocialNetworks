@@ -4,7 +4,6 @@ import { Dispatch } from 'redux';
 import { addPost, updatePostText } from '../../../Redux/profile-reducer';
 import {
   ActionsTypes,
-  ProfilePageType,
   RootStateType,
 } from '../../../Redux/store';
 import { MyPosts } from './MyPosts';
