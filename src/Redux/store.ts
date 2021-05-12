@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   dialogsReducer,
-  sendMessageAC,
-  updateBodyOfNewMessageAC,
+  sendMessage,
+  updateBodyOfNewMessage,
 } from './dialogs-reducer';
-import { addPostAC, profileReducer, updatePostTextAC } from './profile-reducer';
+import { addPost, profileReducer, updatePostText } from './profile-reducer';
 import { sidebarReducer } from './sidebar-reducer';
-import { followAC, setCurrentPageAC, toggleIsFetchingAC, setUsersAC, setUsersTotalCountAC, unfollowAC, usersReducer } from './users-reducer';
+import { follow, setCurrentPage, toggleIsFetching, setUsers, setUsersTotalCount, unfollow, usersReducer } from './users-reducer';
 
 let store = {
   _state: {
@@ -58,22 +58,22 @@ let store = {
 };
 
 export type ActionsTypes =
-  | ReturnType<typeof addPostAC>
-  | ReturnType<typeof updatePostTextAC>
-  | ReturnType<typeof sendMessageAC>
-  | ReturnType<typeof updateBodyOfNewMessageAC>
-  | ReturnType <typeof followAC>
-  | ReturnType <typeof unfollowAC>
-  | ReturnType <typeof setUsersAC>
-  | ReturnType <typeof setCurrentPageAC>
-  | ReturnType <typeof setUsersTotalCountAC>
-  | ReturnType <typeof toggleIsFetchingAC>
+  | ReturnType<typeof addPost>
+  | ReturnType<typeof updatePostText>
+  | ReturnType<typeof sendMessage>
+  | ReturnType<typeof updateBodyOfNewMessage>
+  | ReturnType <typeof follow>
+  | ReturnType <typeof unfollow>
+  | ReturnType <typeof setUsers>
+  | ReturnType <typeof setCurrentPage>
+  | ReturnType <typeof setUsersTotalCount>
+  | ReturnType <typeof toggleIsFetching>
 
-type AddPostActionType = ReturnType<typeof addPostAC>;
-type UpdateNewTextActionType = ReturnType<typeof updatePostTextAC>;
-type sendMessageCreator = ReturnType<typeof sendMessageAC>;
+type AddPostActionType = ReturnType<typeof addPost>;
+type UpdateNewTextActionType = ReturnType<typeof updatePostText>;
+type sendMessageCreator = ReturnType<typeof sendMessage>;
 type updateBodyOfNewMessageCreator = ReturnType<
-  typeof updateBodyOfNewMessageAC
+  typeof updateBodyOfNewMessage
 >;
 
 export type MessagePropsType = {

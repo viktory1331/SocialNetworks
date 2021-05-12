@@ -29,13 +29,13 @@ export const profileReducer = (state: ProfilePageType = initialState, action:Act
       }
    }
 
-   export const addPostAC = (newPostText: string) => {
+   export const addPost = (newPostText: string) => {
       return {
         type: 'ADD-POST',
         newPostText: newPostText,
       } as const;
     };
-   export const updatePostTextAC = (newText: string) => {
+   export const updatePostText = (newText: string) => {
       return {
         type: 'UPDATE-NEW-POST-TEXT',
         newText: newText,
