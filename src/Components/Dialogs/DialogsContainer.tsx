@@ -2,8 +2,8 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import { RootStateType } from '../../Redux/store';
 import {
-  sendMessageAC,
-  updateBodyOfNewMessageAC,
+  sendMessage,
+  updateBodyOfNewMessage,
 } from '../../Redux/dialogs-reducer';
 import { Dialogs } from './Dialogs';
 import { connect } from 'react-redux';
@@ -17,10 +17,10 @@ let mapStateToProps = (state: RootStateType) => {
 let mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     updateBodyOfNewMessage: (text: string) => {
-      dispatch(updateBodyOfNewMessageAC(text));
+      dispatch(updateBodyOfNewMessage(text));
     },
     sendMessage: (newMessageBody: string) => {
-      dispatch(sendMessageAC(newMessageBody));
+      dispatch(sendMessage(newMessageBody));
     },
   };
 };
