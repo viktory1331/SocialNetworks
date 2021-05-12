@@ -7,7 +7,7 @@ type UsersPropsType = {
   follow: (userId: number) => void;
   unfollow: (userId: number) => void;
   usersPage: InitialStateType;
-  setUser: (users: Array<UserType>) => void;
+  setUsers: (users: Array<UserType>) => void;
   pageSize: number;
   totalUsersCount: number;
   currentPage: number;
