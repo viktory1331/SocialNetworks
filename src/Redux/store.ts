@@ -4,9 +4,9 @@ import {
   sendMessage,
   updateBodyOfNewMessage,
 } from './dialogs-reducer';
-import { addPost, profileReducer, updatePostText } from './profile-reducer';
+import { addPost, profileReducer, setUserProfile, updatePostText } from './profile-reducer';
 import { sidebarReducer } from './sidebar-reducer';
-import { follow, setCurrentPage, toggleIsFetching, setUsers, setUsersTotalCount, unfollow, usersReducer } from './users-reducer';
+import { follow, setCurrentPage, toggleIsFetching, setUsers, setUsersTotalCount, unfollow, usersReducer, UserType } from './users-reducer';
 
 let store = {
   _state: {
@@ -17,6 +17,7 @@ let store = {
         { id: 2, message: 'Mяу', numberOfLike: '10 likes' },
       ],
       newPostText: 'It-kamasutra',
+      profile: null
     },
     dialogsPage: {
       messages: [
@@ -68,6 +69,7 @@ export type ActionsTypes =
   | ReturnType <typeof setCurrentPage>
   | ReturnType <typeof setUsersTotalCount>
   | ReturnType <typeof toggleIsFetching>
+  | ReturnType <typeof setUserProfile>
 
 type AddPostActionType = ReturnType<typeof addPost>;
 type UpdateNewTextActionType = ReturnType<typeof updatePostText>;
@@ -92,6 +94,7 @@ export type PostPropsType = {
 export type ProfilePageType = {
   posts: Array<PostPropsType>;
   newPostText: string;
+  profile: null | UserType
 };
 export type DialogsPageType = {
   dialogs: Array<DialogsPropsType>;
