@@ -11,10 +11,10 @@ const initialState: ProfilePageType = {
    { id: 2, message: 'Mяу', numberOfLike: '10 likes' },
 ],
    newPostText: 'It-kamasutra',
-   profile: null
+   profile: null,
 }
 
-export const profileReducer = (state: ProfilePageType = initialState, action:ActionsTypes) => {
+export const profileReducer = (state: ProfilePageType = initialState, action:ActionsTypes): ProfilePageType => {
    switch(action.type ) {
       case ADD_POST: {
          const newPost: PostPropsType = {
@@ -28,6 +28,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action:Act
          return {...state, newPostText: action.newText}
       } 
       case SET_USER_PROFILE:{
+      
          return {...state, profile: action.profile}
       } 
       default:
@@ -47,9 +48,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action:Act
         newText: newText,
       } as const;
     };
-   export const setUserProfile = (profile: null | UserType) => {
-       return {
-            type: SET_USER_PROFILE,
+   export const setUserProfile = (profile: null | UserType) => ({type: SET_USER_PROFILE,
             profile
        } as const 
-    }
+    )
