@@ -1,5 +1,5 @@
 import React from 'react';
-import { InitialStateType, UserType } from '../../Redux/users-reducer';
+import { UserType } from '../../Redux/users-reducer';
 import { MyPostsContainer } from './MyPosts/MyPostsContainer';
 import { ProfileInfo } from './ProfileInfo/ProfileInfo';
 
@@ -9,8 +9,8 @@ let pr = {
 };
 
 type ProfilePropsType = {
-  profile: UserType | null
-}
+  profile: UserType | null;
+};
 
 export const Profile = (props: ProfilePropsType) => {
   return (
