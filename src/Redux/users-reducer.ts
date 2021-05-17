@@ -21,7 +21,9 @@ export type UserType = {
       small: string | undefined,
       large: string | undefined,
     },
-    location: UserLocationType
+    location: UserLocationType,
+    email: string,
+    login: string
 }
 
 const initialState: InitialStateType = { 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { setAuthUserData } from './auth-reducer';
 import {
   dialogsReducer,
   sendMessage,
@@ -6,7 +7,7 @@ import {
 } from './dialogs-reducer';
 import { addPost, profileReducer, setUserProfile, updatePostText } from './profile-reducer';
 import { sidebarReducer } from './sidebar-reducer';
-import { follow, setCurrentPage, toggleIsFetching, setUsers, setUsersTotalCount, unfollow, usersReducer, UserType } from './users-reducer';
+import { follow, setCurrentPage, toggleIsFetching, setUsers, setUsersTotalCount, unfollow, UserType } from './users-reducer';
 
 let store = {
   _state: {
@@ -70,6 +71,7 @@ export type ActionsTypes =
   | ReturnType <typeof setUsersTotalCount>
   | ReturnType <typeof toggleIsFetching>
   | ReturnType <typeof setUserProfile>
+  | ReturnType <typeof setAuthUserData>
 
 type AddPostActionType = ReturnType<typeof addPost>;
 type UpdateNewTextActionType = ReturnType<typeof updatePostText>;
