@@ -3,6 +3,7 @@ import { InitialStateType, UserType } from '../../Redux/users-reducer';
 import userPhoto from '../../assets/Images/user.png';
 import s from './Users.module.css';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 type UsersPropsType = {
   follow: (userId: number) => void;
@@ -57,7 +58,21 @@ export let Users = (props: UsersPropsType) => {
               {u.followed ? (
                 <button
                   onClick={() => {
-                    props.unfollow(u.id);
+                    axios
+                      .delete(
+                        `https://social-network.samuraijs.com/api/1.0//follow/${u.id}`,
+                        {
+                          withCredentials: true,
+                          headers: {
+                            'API-KEY': '664b36ce-5bbb-4afc-9ef0-ebea28b98d90',
+                          },
+                        }
+                      )
+                      .then((response) => {
+                        if (response.data.resultCode === 0) {
+                          props.unfollow(u.id);
+                        }
+                      });
                   }}
                 >
                   Unfollow
@@ -65,7 +80,22 @@ export let Users = (props: UsersPropsType) => {
               ) : (
                 <button
                   onClick={() => {
-                    props.follow(u.id);
+                    axios
+                      .post(
+                        `https://social-network.samuraijs.com/api/1.0//follow/${u.id}`,
+                        {},
+                        {
+                          withCredentials: true,
+                          headers: {
+                            'API-KEY': '664b36ce-5bbb-4afc-9ef0-ebea28b98d90',
+                          },
+                        }
+                      )
+                      .then((response) => {
+                        if (response.data.resultCode === 0) {
+                          props.follow(u.id);
+                        }
+                      });
                   }}
                 >
                   Follow
