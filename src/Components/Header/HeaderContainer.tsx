@@ -8,24 +8,24 @@ import { UserType } from '../../Redux/users-reducer';
 
 type UsersContainerPropsType = {
   setAuthUserData: (
-    login: null | UserType,
-    id: null | UserType,
-    email: null | UserType
+    login: null | string,
+    id: null | number,
+    email: null | string
   ) => void;
-  login: null | UserType;
+  login: null | string;
   isAuth: boolean;
 };
 
 class HeaderContainer extends React.Component<UsersContainerPropsType> {
   componentDidMount() {
-    debugger;
     axios
-      .get(`https://social-network.samuraijs.com/api/1.0/auth/me}`, {
+      .get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
         withCredentials: true,
       })
       .then((response) => {
         if (response.data.resultCode === 0) {
           let { login, id, email } = response.data.data;
+          debugger;
           this.props.setAuthUserData(login, id, email);
         }
       });

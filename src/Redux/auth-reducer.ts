@@ -14,10 +14,10 @@ const initialState: InitialStateType = {
 
 export type InitialStateType = {
    data: {
-      login:null | UserType,
-      id: null | UserType,
-      email: null | UserType
-   }
+      login:null | string,
+      id: null | number,
+      email: null | string
+   },
    isAuth: boolean
 }
 
@@ -25,7 +25,7 @@ export const authReducer = (state: InitialStateType = initialState, action:Actio
    switch(action.type ) {
       case SET_USER_DATA: 
          return {...state, 
-            ...action.data,
+            data: {...action.data},
             isAuth: true
          }
       default:
@@ -33,7 +33,7 @@ export const authReducer = (state: InitialStateType = initialState, action:Actio
       }
    }
 
-   export const setAuthUserData = (login: null | UserType, id:null | UserType, email: null |UserType, ) => {
+   export const setAuthUserData = (login: null | string, id:null | number, email: null |string, ) => {
       return {
         type: SET_USER_DATA,
         data: { login, id, email}

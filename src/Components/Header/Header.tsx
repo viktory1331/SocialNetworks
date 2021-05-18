@@ -6,11 +6,11 @@ import { UserType } from '../../Redux/users-reducer';
 
 type HeaderPropsType = {
   isAuth: boolean,
-  login: null | UserType
+  login: null | string
   setAuthUserData: (
-    login: null | UserType,
-    id: null | UserType,
-    email: null | UserType
+    login: null | string,
+    id: null | number,
+    email: null | string
   ) => void;
 };
 
