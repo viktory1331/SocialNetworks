@@ -19,7 +19,7 @@ type UsersPropsType = {
   isFetching: boolean;
   toggleIsFetching: (isFetching: boolean) => void;
   followingInProgress: Array<number>;
-  toggleFollowingProgress: (isFetching: boolean, userId: number) => boolean;
+  toggleFollowingProgress: (isFetching: boolean, userId: number) => void;
 };
 
 export let Users = (props: UsersPropsType) => {
