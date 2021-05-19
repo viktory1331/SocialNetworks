@@ -7,7 +7,7 @@ import {
 } from './dialogs-reducer';
 import { addPost, profileReducer, setUserProfile, updatePostText } from './profile-reducer';
 import { sidebarReducer } from './sidebar-reducer';
-import { follow, setCurrentPage, toggleIsFetching, setUsers, setUsersTotalCount, unfollow, UserType } from './users-reducer';
+import { follow, setCurrentPage, toggleIsFetching, setUsers, setUsersTotalCount, unfollow, UserType, toggleFollowingProgress } from './users-reducer';
 
 let store = {
   _state: {
@@ -72,6 +72,7 @@ export type ActionsTypes =
   | ReturnType <typeof toggleIsFetching>
   | ReturnType <typeof setUserProfile>
   | ReturnType <typeof setAuthUserData>
+  | ReturnType <typeof toggleFollowingProgress>
 
 type AddPostActionType = ReturnType<typeof addPost>;
 type UpdateNewTextActionType = ReturnType<typeof updatePostText>;
