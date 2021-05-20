@@ -20,10 +20,9 @@ export const usersAPI = {
 
 
 export const followAPI = {
-  setFollow (id: number) {
-    return  instance
-    .delete(
-      `https://social-network.samuraijs.com/api/1.0//follow/${id}`).then(response => {
+  setFollow (id: number, toFollow?: boolean) {
+    return  instance[toFollow ? 'post' : 'delete'](
+      `https://social-network.samuraijs.com/api/1.0/follow/${id}`).then(response => {
         return response.data;
     })
   }
