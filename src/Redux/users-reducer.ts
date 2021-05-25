@@ -164,7 +164,7 @@ export const followThunk = (id: number) => {
 export const unfollowThunk = (id: number) => {
    return (dispatch: Dispatch<ActionsTypes>) => {
       dispatch(toggleFollowingProgress(true, id));
-   followAPI.setFollow(id, true)
+   followAPI.setFollow(id)
    .then((data) => {
       console.log(data);
          if (data.resultCode === 0) {
