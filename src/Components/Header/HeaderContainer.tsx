@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { RootStateReduxType } from '../../Redux/redux-store';
 import { setAuthUserData } from '../../Redux/auth-reducer';
 import { UserType } from '../../Redux/users-reducer';
+import { authAPI } from '../../api/Api';
 
 type UsersContainerPropsType = {
   setAuthUserData: (
@@ -18,11 +19,7 @@ type UsersContainerPropsType = {
 
 class HeaderContainer extends React.Component<UsersContainerPropsType> {
   componentDidMount() {
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-        withCredentials: true,
-      })
-      .then((response) => {
+    authAPI.me().then((response) => {
         if (response.data.resultCode === 0) {
           let { login, id, email } = response.data.data;
           debugger;
