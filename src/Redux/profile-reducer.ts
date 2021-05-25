@@ -1,3 +1,5 @@
+import { Dispatch } from 'redux';
+import { usersAPI } from '../api/Api';
 import { PostPropsType, ActionsTypes, ProfilePageType } from './store';
 import { UserType } from './users-reducer';
 const ADD_POST = 'ADD-POST';
@@ -53,3 +55,11 @@ export const setUserProfile = (profile: null | UserType) => ({
    profile
 } as const
 )
+export const getUserProfile = (userId: number) => (dispatch: Dispatch<ActionsTypes>) => {
+   usersAPI
+      .getProfile(userId)
+      .then((response) => {
+         dispatch(setUserProfile(response.data));
+      })
+      .catch((e) => console.log(e));
+}

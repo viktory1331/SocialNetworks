@@ -1,6 +1,7 @@
 import React from 'react'
+import { Dispatch } from 'redux';
+import { authAPI } from '../api/Api';
 import { ActionsTypes } from './store';
-import { UserType } from './users-reducer';
 const SET_USER_DATA = 'SET_USER_DATA';
 
 const initialState: InitialStateType = {
@@ -40,3 +41,11 @@ export const setAuthUserData = (login: null | string, id: null | number, email: 
       data: { login, id, email }
    } as const;
 };
+export const getAuthUserData = () => (dispatch: Dispatch<ActionsTypes>) => {
+   authAPI.me().then((response) => {
+      if (response.data.resultCode === 0) {
+        let { login, id, email } = response.data.data;
+        dispatch(setAuthUserData(login, id, email));
+      }
+    });
+}
