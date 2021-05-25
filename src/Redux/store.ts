@@ -54,7 +54,7 @@ let store = {
     profileReducer(this._state.profilePage, action);
     dialogsReducer(this._state.dialogsPage, action);
     sidebarReducer(this._state.sidebar, action);
-    
+
     this._callSubscriber(this._state);
   },
 };
@@ -64,15 +64,15 @@ export type ActionsTypes =
   | ReturnType<typeof updatePostText>
   | ReturnType<typeof sendMessage>
   | ReturnType<typeof updateBodyOfNewMessage>
-  | ReturnType <typeof follow>
-  | ReturnType <typeof unfollow>
-  | ReturnType <typeof setUsers>
-  | ReturnType <typeof setCurrentPage>
-  | ReturnType <typeof setUsersTotalCount>
-  | ReturnType <typeof toggleIsFetching>
-  | ReturnType <typeof setUserProfile>
-  | ReturnType <typeof setAuthUserData>
-  | ReturnType <typeof toggleFollowingProgress>
+  | ReturnType<typeof follow>
+  | ReturnType<typeof unfollow>
+  | ReturnType<typeof setUsers>
+  | ReturnType<typeof setCurrentPage>
+  | ReturnType<typeof setUsersTotalCount>
+  | ReturnType<typeof toggleIsFetching>
+  | ReturnType<typeof setUserProfile>
+  | ReturnType<typeof setAuthUserData>
+  | ReturnType<typeof toggleFollowingProgress>
 
 type AddPostActionType = ReturnType<typeof addPost>;
 type UpdateNewTextActionType = ReturnType<typeof updatePostText>;
