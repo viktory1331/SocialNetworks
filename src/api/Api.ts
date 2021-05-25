@@ -15,16 +15,22 @@ export const usersAPI = {
       .then(response => {
         return response.data;
       })
-  }
-}
-
-
-export const followAPI = {
+  },
   setFollow(id: number, toFollow?: boolean) {
     return instance[toFollow ? 'post' : 'delete'](
-      `https://social-network.samuraijs.com/api/1.0/follow/${id}`).then(response => {
+      `follow/${id}`).then(response => {
         return response.data;
       })
+  },
+  getProfile(userId: number) {
+    return instance.get(`profile/${userId}`);
   }
 }
+
+export const authAPI = {
+  me() {
+    return instance.get(`auth/me`)
+  }
+}
+
 
