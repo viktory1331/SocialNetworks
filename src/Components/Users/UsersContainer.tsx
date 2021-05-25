@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import axios from 'axios';
 import { RootStateReduxType } from '../../Redux/redux-store';
 import {
   follow,
+  followThunk,
+  getUsers,
   InitialStateType,
   setCurrentPage,
   setUsers,
@@ -12,12 +13,12 @@ import {
   toggleFollowingProgress,
   toggleIsFetching,
   unfollow,
+  unfollowThunk,
   UserType,
 } from '../../Redux/users-reducer';
 import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
 import { usersAPI } from '../../api/Api';
-
 
 type MapStatePropsType = {
   usersPage: InitialStateType;
@@ -25,44 +26,25 @@ type MapStatePropsType = {
   totalUsersCount: number;
   currentPage: number;
   isFetching: boolean;
-  followingInProgress: Array <number>;
+  followingInProgress: Array<number>;
 };
 
 type MapDispatchPropsType = {
-  follow: (userId: number) => void;
-  unfollow: (userId: number) => void;
-  setUsers: (users: Array<UserType>) => void;
+  unfollowThunk: (id: number) => void;
+  followThunk: (id: number) => void;
   setCurrentPage: (currentPage: number) => void;
-  setUsersTotalCount: (totalUsersCount: number) => void;
-  toggleIsFetching: (isFetching: boolean) => void;
-  toggleFollowingProgress: (isFetching: boolean, userId: number) => void;
+  getUsers: (currentPage: number, pageSize: number) => void;
 };
-
 
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType;
 
 class UsersContainer extends React.Component<UsersPropsType> {
   componentDidMount() {
-    this.props.toggleIsFetching(true);
-
-    usersAPI
-      .getUsers(this.props.currentPage, this.props.pageSize)
-      .then((data) => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(data.items);
-        this.props.setUsersTotalCount(data.totalCount);
-      });
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
 
   onPageChanged = (currentPage: number) => {
-    this.props.toggleIsFetching(true);
-    this.props.setCurrentPage(currentPage);
-    usersAPI
-      .getUsers(this.props.currentPage, this.props.pageSize)
-      .then((data) => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(data.items);
-      });
+    this.props.getUsers(currentPage, this.props.pageSize);
   };
 
   render() {
@@ -70,24 +52,23 @@ class UsersContainer extends React.Component<UsersPropsType> {
       <>
         {this.props.isFetching ? <Preloader /> : null}
         <Users
-          totalUsersCount={this.props.totalUsersCount}//
-          pageSize={this.props.pageSize}//
-          currentPage={this.props.currentPage}//
+          totalUsersCount={this.props.totalUsersCount} 
+          pageSize={this.props.pageSize} 
+          currentPage={this.props.currentPage} 
           onPageChanged={this.onPageChanged}
-          setUsers={this.props.setUsers}//
-          follow={this.props.follow}//
-          unfollow={this.props.unfollow}//
-          usersPage={this.props.usersPage}//
-          isFetching={this.props.isFetching}//
+          followThunk={this.props.followThunk} 
+          unfollowThunk={this.props.unfollowThunk} 
+          usersPage={this.props.usersPage} 
+          isFetching={this.props.isFetching} 
           setCurrentPage={this.props.setCurrentPage}
-          toggleIsFetching={this.props.toggleIsFetching}
-          followingInProgress={this.props.followingInProgress}//
-          toggleFollowingProgress={this.props.toggleFollowingProgress}
+          followingInProgress={this.props.followingInProgress} 
         />
       </>
     );
   }
 }
+
+
 
 let mapStateToProps = (state: RootStateReduxType): MapStatePropsType => {
   return {
@@ -101,11 +82,8 @@ let mapStateToProps = (state: RootStateReduxType): MapStatePropsType => {
 };
 
 export default connect(mapStateToProps, {
-  follow,
-  unfollow,
-  setUsers,
-  setCurrentPage,
-  setUsersTotalCount,
-  toggleIsFetching,
-  toggleFollowingProgress,
+  followThunk,
+  unfollowThunk,
+  setCurrentPage, 
+  getUsers,
 })(UsersContainer);
