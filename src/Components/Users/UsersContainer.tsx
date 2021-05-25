@@ -1,24 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 import { RootStateReduxType } from '../../Redux/redux-store';
 import {
-  follow,
   followThunk,
   getUsers,
   InitialStateType,
   setCurrentPage,
-  setUsers,
-  setUsersTotalCount,
-  toggleFollowingProgress,
-  toggleIsFetching,
-  unfollow,
   unfollowThunk,
-  UserType,
 } from '../../Redux/users-reducer';
 import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
-import { usersAPI } from '../../api/Api';
+
 
 type MapStatePropsType = {
   usersPage: InitialStateType;
