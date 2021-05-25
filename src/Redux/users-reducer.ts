@@ -1,5 +1,5 @@
+import { usersAPI } from './../api/Api';
 import React from 'react'
-import { followAPI, usersAPI } from '../api/Api';
 import { Dispatch } from 'redux';
 import { ActionsTypes } from './store';
 const FOLLOW = 'FOLLOW';
@@ -153,7 +153,7 @@ export const getUsers = (currentPage: number, pageSize: number) => {
 export const followThunk = (id: number) => {
    return (dispatch: Dispatch<ActionsTypes>) => {
       dispatch(toggleFollowingProgress(true, id));
-      followAPI.setFollow(id, true)
+      usersAPI.setFollow(id, true)
          .then((data) => {
             console.log(data);
             if (data.resultCode === 0) {
@@ -167,7 +167,7 @@ export const followThunk = (id: number) => {
 export const unfollowThunk = (id: number) => {
    return (dispatch: Dispatch<ActionsTypes>) => {
       dispatch(toggleFollowingProgress(true, id));
-      followAPI.setFollow(id)
+      usersAPI.setFollow(id)
          .then((data) => {
             console.log(data);
             if (data.resultCode === 0) {
