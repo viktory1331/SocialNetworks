@@ -1,17 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { InitialStateType } from '../../Redux/auth-reducer';
 import s from './Header.module.css';
-import { UserType } from '../../Redux/users-reducer';
 
 type HeaderPropsType = {
-  isAuth: boolean,
-  login: null | string
-  setAuthUserData: (
-    login: null | string,
-    id: null | number,
-    email: null | string
-  ) => void;
+  isAuth: boolean;
+  login: null | string;
 };
 
 export const Header = (props: HeaderPropsType) => {
