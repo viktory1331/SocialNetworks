@@ -2,11 +2,9 @@ import React from 'react';
 import {
   InitialStateType,
   unfollowThunk,
-  UserType,
 } from '../../Redux/users-reducer';
 import userPhoto from '../../assets/Images/user.png';
 import s from './Users.module.css';
-import { followAPI } from '../../api/Api';
 import { NavLink } from 'react-router-dom';
 
 type UsersPropsType = {
