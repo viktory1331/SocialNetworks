@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 import React from 'react'
 
 const instance = axios.create({
@@ -15,7 +15,7 @@ export const usersAPI = {
      .then(response => {
       return response.data;
      })
-   }
+  }
 }
 
 
