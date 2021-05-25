@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   InitialStateType,
-  unfollowThunk,
 } from '../../Redux/users-reducer';
 import userPhoto from '../../assets/Images/user.png';
 import s from './Users.module.css';
