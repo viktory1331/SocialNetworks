@@ -1,5 +1,7 @@
 import React from 'react'
-import { PostPropsType, ActionsTypes, ProfilePageType } from './store';
+import { followAPI, usersAPI } from '../api/Api';
+import { Dispatch } from 'redux';
+import { ActionsTypes} from './store';
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -130,3 +132,44 @@ export const usersReducer = (state: InitialStateType = initialState, action:Acti
          isFetching, userId
       } as const
    }
+
+
+
+   export const getUsers = (currentPage: number, pageSize: number) => {
+      return (dispatch: Dispatch<ActionsTypes>) => {
+         dispatch(toggleIsFetching(true));
+      usersAPI.getUsers(currentPage, pageSize)
+      .then((data) => { 
+         dispatch(toggleIsFetching(false));
+         dispatch(setUsers(data.items));
+         dispatch(setUsersTotalCount(data.totalCount));
+         dispatch(setCurrentPage(currentPage))
+      });
+   }
+}
+
+export const followThunk = (id: number) => {
+   return (dispatch: Dispatch<ActionsTypes>) => {
+      dispatch(toggleFollowingProgress(true, id));
+   followAPI.setFollow(id, true)
+   .then((data) => {
+      console.log(data);
+         if (data.resultCode === 0) {
+            dispatch(follow(id));
+   }
+})
+   .finally(() =>dispatch(toggleFollowingProgress(false, id)));
+}}
+
+export const unfollowThunk = (id: number) => {
+   return (dispatch: Dispatch<ActionsTypes>) => {
+      dispatch(toggleFollowingProgress(true, id));
+   followAPI.setFollow(id, true)
+   .then((data) => {
+      console.log(data);
+         if (data.resultCode === 0) {
+            dispatch(unfollow(id));
+   }
+})
+   .finally(() =>dispatch(toggleFollowingProgress(false, id)));
+}}
