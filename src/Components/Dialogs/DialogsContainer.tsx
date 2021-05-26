@@ -8,10 +8,14 @@ import {
 import { Dialogs } from './Dialogs';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { RootStateReduxType } from '../../Redux/redux-store';
 
-let mapStateToProps = (state: RootStateType) => {
+
+
+let mapStateToProps = (state: RootStateReduxType ) => {
   return {
     dialogsPage: state.dialogsPage,
+    isAuth: state.auth.isAuth
   };
 };
 let mapDispatchToProps = (dispatch: Dispatch) => {
