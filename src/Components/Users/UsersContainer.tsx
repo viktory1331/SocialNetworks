@@ -10,7 +10,7 @@ import {
 } from '../../Redux/users-reducer';
 import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
-
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 type MapStatePropsType = {
   usersPage: InitialStateType;
@@ -44,23 +44,21 @@ class UsersContainer extends React.Component<UsersPropsType> {
       <>
         {this.props.isFetching ? <Preloader /> : null}
         <Users
-          totalUsersCount={this.props.totalUsersCount} 
-          pageSize={this.props.pageSize} 
-          currentPage={this.props.currentPage} 
+          totalUsersCount={this.props.totalUsersCount}
+          pageSize={this.props.pageSize}
+          currentPage={this.props.currentPage}
           onPageChanged={this.onPageChanged}
-          followThunk={this.props.followThunk} 
-          unfollowThunk={this.props.unfollowThunk} 
-          usersPage={this.props.usersPage} 
-          isFetching={this.props.isFetching} 
+          followThunk={this.props.followThunk}
+          unfollowThunk={this.props.unfollowThunk}
+          usersPage={this.props.usersPage}
+          isFetching={this.props.isFetching}
           setCurrentPage={this.props.setCurrentPage}
-          followingInProgress={this.props.followingInProgress} 
+          followingInProgress={this.props.followingInProgress}
         />
       </>
     );
   }
 }
-
-
 
 let mapStateToProps = (state: RootStateReduxType): MapStatePropsType => {
   return {
@@ -73,9 +71,11 @@ let mapStateToProps = (state: RootStateReduxType): MapStatePropsType => {
   };
 };
 
-export default connect(mapStateToProps, {
-  followThunk,
-  unfollowThunk,
-  setCurrentPage, 
-  getUsers,
-})(UsersContainer);
+export default withAuthRedirect(
+  connect(mapStateToProps, {
+    followThunk,
+    unfollowThunk,
+    setCurrentPage,
+    getUsers,
+  })(UsersContainer)
+);
