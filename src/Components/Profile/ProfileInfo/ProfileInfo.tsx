@@ -1,7 +1,8 @@
 import React from 'react';
-import { InitialStateType, UserType } from '../../../Redux/users-reducer';
+import { UserType } from '../../../Redux/users-reducer';
 import { Preloader } from '../../common/Preloader/Preloader';
 import s from './ProfileInfo.module.css';
+import { ProfileStatus } from './ProfileStatus';
 
 type ProfileInfoPropsType = {
   profile: null | UserType;
@@ -13,12 +14,9 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
   }
   return (
     <div>
-      <div>
-        <img src="https://cdn.pixabay.com/photo/2015/09/09/16/05/forest-931706__340.jpg" />
-      </div>
       <div className={s.descriptionBlock}>
         <img src={props.profile.photos.large} />
-        картинОчка
+        <ProfileStatus myFullName={'Fedosowa Victoria'} status={'IT-girl?!'} />
       </div>
     </div>
   );
