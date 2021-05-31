@@ -1,3 +1,14 @@
 .descriptionBlock {
   padding: 10px;
 }
+
+.profileStatus {
+  float: right;
+  margin-top: 15px;
+  margin-right: 80px;
+  color: rgb(43, 40, 40);
+}
+
+.myFullName {
+  padding-bottom: 10px;
+}
