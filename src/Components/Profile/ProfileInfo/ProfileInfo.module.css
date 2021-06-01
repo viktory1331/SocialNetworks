@@ -3,10 +3,12 @@
 }
 
 .profileStatus {
+  background-color: #4c5f512a;
   float: right;
   margin-top: 15px;
   margin-right: 80px;
   color: rgb(43, 40, 40);
+  border-bottom: 1px solid #4c5f51;
 }
 
 .myFullName {
