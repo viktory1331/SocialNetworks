@@ -44,8 +44,8 @@ export const setAuthUserData = (login: null | string, id: null | number, email: 
 export const getAuthUserData = () => (dispatch: Dispatch<ActionsTypes>) => {
    authAPI.me().then((response) => {
       if (response.data.resultCode === 0) {
-        let { login, id, email } = response.data.data;
-        dispatch(setAuthUserData(login, id, email));
+         let { login, id, email } = response.data.data;
+         dispatch(setAuthUserData(login, id, email));
       }
-    });
+   });
 }
