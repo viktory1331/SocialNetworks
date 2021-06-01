@@ -1,10 +1,11 @@
 import { Dispatch } from 'redux';
-import { usersAPI } from '../api/Api';
+import { profileAPI, usersAPI } from '../api/Api';
 import { PostPropsType, ActionsTypes, ProfilePageType } from './store';
 import { UserType } from './users-reducer';
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_STATUS = 'SET_STATUS'
 
 const initialState: ProfilePageType = {
    posts: [
@@ -14,6 +15,7 @@ const initialState: ProfilePageType = {
    ],
    newPostText: 'It-kamasutra',
    profile: null,
+   status: ''
 }
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
@@ -32,6 +34,9 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
       case SET_USER_PROFILE: {
 
          return { ...state, profile: action.profile }
+      }
+      case SET_STATUS: {
+         return { ...state, status: action.status }
       }
       default:
          return state
@@ -55,11 +60,34 @@ export const setUserProfile = (profile: null | UserType) => ({
    profile
 } as const
 )
+export const setStatus = (status: string) => ({
+   type: SET_STATUS,
+   status
+} as const
+)
 export const getUserProfile = (userId: number) => (dispatch: Dispatch<ActionsTypes>) => {
    usersAPI
       .getProfile(userId)
       .then((response) => {
          dispatch(setUserProfile(response.data));
+      })
+      .catch((e) => console.log(e));
+}
+export const getStatus = (userId: number) => (dispatch: Dispatch<ActionsTypes>) => {
+   profileAPI
+      .getStatus(userId)
+      .then((response) => {
+         dispatch(setStatus(response.data));
+      })
+      .catch((e) => console.log(e));
+}
+export const updateStatus = (status: string) => (dispatch: Dispatch<ActionsTypes>) => {
+   profileAPI
+      .updateStatus(status)
+      .then((response) => {
+         if (response.data.resultCode === 0) {
+            dispatch(setStatus(status));
+         }
       })
       .catch((e) => console.log(e));
 }
