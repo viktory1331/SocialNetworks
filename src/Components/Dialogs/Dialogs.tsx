@@ -26,7 +26,7 @@ export const Dialogs = (props: PropsType) => {
     <Message message={m.message} id={m.id} key={m.id} />
   ));
 
-  let addNewMessage = (values: any) => {
+  let addNewMessage = (values: { newMessageBody: string }) => {
     props.sendMessage(values.newMessageBody);
   };
 
