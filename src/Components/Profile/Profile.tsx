@@ -12,13 +12,14 @@ type ProfilePropsType = {
   profile: UserType | null;
   status: string;
   updateStatus: (status: string) => void;
+  newPostText: string
 };
 
 export const Profile = (props: ProfilePropsType) => {
   return (
     <div>
       <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus} />
-      <MyPostsContainer />
+      <MyPostsContainer newPostText={props.newPostText} />
     </div>
   );
 };
