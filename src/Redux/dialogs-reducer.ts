@@ -1,6 +1,5 @@
 import React from 'react'
 import { DialogsPageType, ActionsTypes } from './store';
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
 let initialState = {
@@ -19,18 +18,15 @@ let initialState = {
       { id: 4, name: 'Alisa' },
       { id: 5, name: 'Nastya' },
       { id: 6, name: 'Luis' },
-   ],
-   newMessageBody: '',
+   ]
 }
 
 export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes) => {
 
    switch (action.type) {
-      case UPDATE_NEW_MESSAGE_BODY:
-         return { ...state, newMessageBody: action.body };
       case SEND_MESSAGE:
-         let body = state.newMessageBody;
-         return { ...state, newMessageBody: '', messages: [...state.messages, { id: 6, message: body }] }
+         let body = action.newMessageBody;
+         return { ...state, messages: [...state.messages, { id: 6, message: body }] }
       default:
          return state
    }
@@ -40,11 +36,5 @@ export const sendMessage = (newMessageBody: string) => {
    return {
       type: SEND_MESSAGE,
       newMessageBody: newMessageBody,
-   } as const;
-};
-export const updateBodyOfNewMessage = (body: string) => {
-   return {
-      type: UPDATE_NEW_MESSAGE_BODY,
-      body: body,
    } as const;
 };

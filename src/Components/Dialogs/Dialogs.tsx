@@ -4,10 +4,10 @@ import { DialogItem } from './DialogItem/DialogItem';
 import { Message } from './Message/Message';
 import { DialogsPageType } from '../../Redux/store';
 import { Redirect } from 'react-router';
+import { Field, reduxForm } from 'redux-form';
 
 type PropsType = {
   dialogsPage: DialogsPageType;
-  updateBodyOfNewMessage: (text: string) => void;
   sendMessage: (newMessageBody: string) => void;
   isAuth: boolean;
 };
@@ -22,34 +22,40 @@ export const Dialogs = (props: PropsType) => {
     <Message message={m.message} id={m.id} key={m.id} />
   ));
 
-  let onSendMessageClick = () => {
-    props.sendMessage(props.dialogsPage.newMessageBody);
+  let addNewMessage = (values: any) => {
+    props.sendMessage(values.newMessageBody);
   };
 
-  let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.updateBodyOfNewMessage(e.target.value);
-  };
-
-  if (!props.isAuth) return <Redirect to={"/login"} />;
+  if (!props.isAuth) return <Redirect to={'/login'} />;
 
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsItems}>{dialogsElement}</div>
       <div className={s.messages}>
         <div>{messagesElement}</div>
-        <div>
-          <div>
-            <textarea
-              onChange={onNewMessageChange}
-              value={props.dialogsPage.newMessageBody}
-              placeholder="Enter your message"
-            ></textarea>
-          </div>
-          <div>
-            <button onClick={onSendMessageClick}>Send</button>
-          </div>
-        </div>
+        <AddMessageFormRedux onSubmit={addNewMessage} />
       </div>
     </div>
   );
 };
+
+const AddMessageForm = (props: any) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div>
+        <Field
+          component={'textarea'}
+          placeholder={'Enter your message'}
+          name={'newMessageBody'}
+        />
+      </div>
+      <div>
+        <button>Send</button>
+      </div>
+    </form>
+  );
+};
+
+const AddMessageFormRedux = reduxForm({ form: 'AddMessageForm' })(
+  AddMessageForm
+);

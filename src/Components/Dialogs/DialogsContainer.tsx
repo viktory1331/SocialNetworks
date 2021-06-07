@@ -1,9 +1,6 @@
 import React from 'react';
 import s from './Dialogs.module.css';
-import {
-  sendMessage,
-  updateBodyOfNewMessage,
-} from '../../Redux/dialogs-reducer';
+import { sendMessage } from '../../Redux/dialogs-reducer';
 import { Dialogs } from './Dialogs';
 import { connect } from 'react-redux';
 import { compose, Dispatch } from 'redux';
@@ -17,9 +14,6 @@ let mapStateToProps = (state: RootStateReduxType) => {
 };
 let mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    updateBodyOfNewMessage: (text: string) => {
-      dispatch(updateBodyOfNewMessage(text));
-    },
     sendMessage: (newMessageBody: string) => {
       dispatch(sendMessage(newMessageBody));
     },

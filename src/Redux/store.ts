@@ -3,7 +3,6 @@ import { setAuthUserData } from './auth-reducer';
 import {
   dialogsReducer,
   sendMessage,
-  updateBodyOfNewMessage,
 } from './dialogs-reducer';
 import { addPost, profileReducer, setStatus, setUserProfile, updatePostText } from './profile-reducer';
 import { sidebarReducer } from './sidebar-reducer';
@@ -64,7 +63,6 @@ export type ActionsTypes =
   | ReturnType<typeof addPost>
   | ReturnType<typeof updatePostText>
   | ReturnType<typeof sendMessage>
-  | ReturnType<typeof updateBodyOfNewMessage>
   | ReturnType<typeof follow>
   | ReturnType<typeof unfollow>
   | ReturnType<typeof setUsers>
@@ -79,9 +77,7 @@ export type ActionsTypes =
 type AddPostActionType = ReturnType<typeof addPost>;
 type UpdateNewTextActionType = ReturnType<typeof updatePostText>;
 type sendMessageCreator = ReturnType<typeof sendMessage>;
-type updateBodyOfNewMessageCreator = ReturnType<
-  typeof updateBodyOfNewMessage
->;
+
 
 export type MessagePropsType = {
   message: string;
@@ -105,7 +101,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
   dialogs: Array<DialogsPropsType>;
   messages: Array<MessagePropsType>;
-  newMessageBody: string;
+  // newMessageBody: string;
 };
 export type SidebarType = {};
 
