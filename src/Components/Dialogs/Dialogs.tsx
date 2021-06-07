@@ -4,12 +4,16 @@ import { DialogItem } from './DialogItem/DialogItem';
 import { Message } from './Message/Message';
 import { DialogsPageType } from '../../Redux/store';
 import { Redirect } from 'react-router';
-import { Field, reduxForm } from 'redux-form';
+import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 
 type PropsType = {
   dialogsPage: DialogsPageType;
   sendMessage: (newMessageBody: string) => void;
   isAuth: boolean;
+};
+
+type FormDataType = {
+  newMessageBody: string;
 };
 
 export const Dialogs = (props: PropsType) => {
@@ -39,7 +43,7 @@ export const Dialogs = (props: PropsType) => {
   );
 };
 
-const AddMessageForm = (props: any) => {
+const AddMessageForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
@@ -56,6 +60,6 @@ const AddMessageForm = (props: any) => {
   );
 };
 
-const AddMessageFormRedux = reduxForm({ form: 'AddMessageForm' })(
+const AddMessageFormRedux = reduxForm<FormDataType>({ form: 'AddMessageForm' })(
   AddMessageForm
 );
