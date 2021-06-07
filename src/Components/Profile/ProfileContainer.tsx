@@ -44,6 +44,7 @@ class ProfileContainer extends React.Component<
         profile={this.props.profile}
         status={this.props.status}
         updateStatus={this.props.updateStatus}
+        newPostText={this.props.newPostText}
       />
     );
   }
