@@ -3,7 +3,6 @@ import { profileAPI, usersAPI } from '../api/Api';
 import { PostPropsType, ActionsTypes, ProfilePageType } from './store';
 import { UserType } from './users-reducer';
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
@@ -13,7 +12,6 @@ const initialState: ProfilePageType = {
       { id: 2, message: 'I am cat', numberOfLike: '5 likes' },
       { id: 2, message: 'Mяу', numberOfLike: '10 likes' },
    ],
-   newPostText: 'It-kamasutra',
    profile: null,
    status: ''
 }
@@ -23,13 +21,10 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
       case ADD_POST: {
          const newPost: PostPropsType = {
             id: new Date().getTime(),
-            message: state.newPostText,
+            message: action.newPostText,
             numberOfLike: '0',
          };
-         return { ...state, posts: [...state.posts, newPost], newPostText: '' }
-      }
-      case UPDATE_NEW_POST_TEXT: {
-         return { ...state, newPostText: action.newText }
+         return { ...state, posts: [...state.posts, newPost]}
       }
       case SET_USER_PROFILE: {
 
@@ -47,12 +42,6 @@ export const addPost = (newPostText: string) => {
    return {
       type: ADD_POST,
       newPostText: newPostText,
-   } as const;
-};
-export const updatePostText = (newText: string) => {
-   return {
-      type: UPDATE_NEW_POST_TEXT,
-      newText: newText,
    } as const;
 };
 export const setUserProfile = (profile: null | UserType) => ({

@@ -4,7 +4,7 @@ import {
   dialogsReducer,
   sendMessage,
 } from './dialogs-reducer';
-import { addPost, profileReducer, setStatus, setUserProfile, updatePostText } from './profile-reducer';
+import { addPost, profileReducer, setStatus, setUserProfile} from './profile-reducer';
 import { sidebarReducer } from './sidebar-reducer';
 import { follow, setCurrentPage, toggleIsFetching, setUsers, setUsersTotalCount, unfollow, UserType, toggleFollowingProgress } from './users-reducer';
 
@@ -61,7 +61,6 @@ let store = {
 
 export type ActionsTypes =
   | ReturnType<typeof addPost>
-  | ReturnType<typeof updatePostText>
   | ReturnType<typeof sendMessage>
   | ReturnType<typeof follow>
   | ReturnType<typeof unfollow>
@@ -75,7 +74,6 @@ export type ActionsTypes =
   | ReturnType<typeof setStatus>
 
 type AddPostActionType = ReturnType<typeof addPost>;
-type UpdateNewTextActionType = ReturnType<typeof updatePostText>;
 type sendMessageCreator = ReturnType<typeof sendMessage>;
 
 
@@ -94,14 +92,12 @@ export type PostPropsType = {
 };
 export type ProfilePageType = {
   posts: Array<PostPropsType>;
-  newPostText: string;
   profile: null | UserType;
   status: string
 };
 export type DialogsPageType = {
   dialogs: Array<DialogsPropsType>;
   messages: Array<MessagePropsType>;
-  // newMessageBody: string;
 };
 export type SidebarType = {};
 
