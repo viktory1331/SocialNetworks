@@ -1,5 +1,6 @@
 import React from 'react'
 import { Dispatch } from 'redux';
+import { FormAction, stopSubmit } from 'redux-form';
 import { authAPI } from '../api/Api';
 import { ActionsTypes } from './store';
 const SET_USER_DATA = 'SET_USER_DATA';
@@ -51,11 +52,16 @@ export const getAuthUserData = () => (dispatch: Dispatch<ActionsTypes>) => {
 }
 
 
-export const login = (email: string, password: string, rememberMe = false) => (dispatch: Dispatch<ActionsTypes>) => {
+export const login = (email: string, password: string, rememberMe = false) => (dispatch: Dispatch<FormAction>) => {
+
    authAPI.login(email, password, rememberMe = false).then((response) => {
       if (response.data.resultCode === 0) {
          let { login, id, email, isAuth } = response.data.data;
          dispatch(setAuthUserData(login, id, email, isAuth));
+      }
+      else {
+         let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+         dispatch(stopSubmit('login', { _error: message }))
       }
    });
 }
