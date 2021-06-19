@@ -1,8 +1,13 @@
 .formControl.error input,
 .formControl.error textarea {
-  border-bottom : 2px solid #e60808;
+  border-bottom: 2px solid #e60808;
 }
 
 .formControl.error span {
   color: #e60808;
+}
+
+.errorFormSymmary {
+  padding: 5px 0 5px;
+  color: rgb(136, 0, 0);
 }
