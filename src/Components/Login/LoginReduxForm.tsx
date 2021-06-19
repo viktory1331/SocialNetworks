@@ -11,6 +11,7 @@ type FormDataType = {
 };
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+  const { pristine, submitting, reset } = props;
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
@@ -39,6 +40,9 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
       )}
       <div>
         <button>Login</button>
+        <button type="button" disabled={pristine || submitting} onClick={reset}>
+          Clear Values
+        </button>
       </div>
     </form>
   );
