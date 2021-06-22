@@ -28,7 +28,6 @@ export const MyPosts = (props: MyPostsPropsType) => {
   const newPostElement = React.createRef<HTMLTextAreaElement>();
 
   const onAddPost = (values: { newPostText: string }) => {
-    debugger;
     props.addPost(values.newPostText);
   };
 

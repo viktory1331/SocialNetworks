@@ -1,13 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { addPost} from '../../../Redux/profile-reducer';
 import {
-  ActionsTypes,
-  RootStateType,
-} from '../../../Redux/store';
+  DialogsPropsType,
+  MessagePropsType,
+} from '../../../Redux/dialogs-reducer';
+import { addPost, ProfilePageType } from '../../../Redux/profile-reducer';
+import { ActionsTypes } from '../../../Redux/redux-store';
 import { MyPosts } from './MyPosts';
 import { PostPropsType } from './Post/Post';
+
+export type RootStateType = {
+  profilePage: ProfilePageType;
+  dialogsPage: DialogsPageType;
+  sidebar: SidebarType;
+};
+
+export type DialogsPageType = {
+  dialogs: Array<DialogsPropsType>;
+  messages: Array<MessagePropsType>;
+};
+export type SidebarType = {};
 
 type MyPostsPropsType = {
   state: RootStateType;

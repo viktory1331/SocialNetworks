@@ -10,7 +10,6 @@ type HeaderPropsType = {
 
 
 export const Header = (props: HeaderPropsType) => {
-  debugger;
   return (
     <header className={s.header}>
       <img src="https://www.freepnglogos.com/uploads/company-logo-png/company-logo-transparent-png-19.png" />

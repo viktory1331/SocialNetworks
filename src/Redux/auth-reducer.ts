@@ -2,7 +2,7 @@ import React from 'react'
 import { Dispatch } from 'redux';
 import { FormAction, stopSubmit } from 'redux-form';
 import { authAPI } from '../api/Api';
-import { ActionsTypes } from './store';
+import { ActionsTypes } from './redux-store';
 const SET_USER_DATA = 'SET_USER_DATA';
 
 const initialState: InitialStateType = {
@@ -24,6 +24,10 @@ export type InitialStateType = {
 }
 
 export const authReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
+   if (action.type.indexOf('@@redux-form') < 0) {
+      console.log(action)
+   }
+
    switch (action.type) {
       case SET_USER_DATA:
          return {
@@ -37,13 +41,14 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
 }
 
 export const setAuthUserData = (login: null | string, id: null | number, email: null | string, isAuth: boolean) => {
+   console.log(login, id, email, isAuth)
    return {
       type: SET_USER_DATA,
       payload: { login, id, email, isAuth }
    } as const;
 };
 export const getAuthUserData = () => (dispatch: Dispatch<ActionsTypes>) => {
-   authAPI.me().then((response) => {
+   return authAPI.me().then((response) => {
       if (response.data.resultCode === 0) {
          let { login, id, email } = response.data.data;
          dispatch(setAuthUserData(login, id, email, true));
@@ -51,13 +56,11 @@ export const getAuthUserData = () => (dispatch: Dispatch<ActionsTypes>) => {
    });
 }
 
-
 export const login = (email: string, password: string, rememberMe = false) => (dispatch: Dispatch<FormAction>) => {
-
    authAPI.login(email, password, rememberMe = false).then((response) => {
       if (response.data.resultCode === 0) {
-         let { login, id, email, isAuth } = response.data.data;
-         dispatch(setAuthUserData(login, id, email, isAuth));
+         let { userId, email } = response.data.data;
+         dispatch(setAuthUserData(email, userId, email, true));
       }
       else {
          let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
@@ -65,7 +68,6 @@ export const login = (email: string, password: string, rememberMe = false) => (d
       }
    });
 }
-
 
 export const logout = () => (dispatch: Dispatch<ActionsTypes>) => {
    authAPI.logout().then((response) => {

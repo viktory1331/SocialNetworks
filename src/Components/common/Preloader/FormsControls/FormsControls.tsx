@@ -10,7 +10,6 @@ const FormControl: FC<WrappedFieldProps> = ({
   ...props
 }) => {
   const isError = meta.touched && meta.error;
-  debugger;
   return (
     <div className={styles.formControl + ' ' + (isError ? styles.error : '')}>
       <div>{children}</div>

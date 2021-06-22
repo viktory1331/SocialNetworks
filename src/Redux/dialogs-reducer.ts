@@ -1,5 +1,5 @@
 import React from 'react'
-import { DialogsPageType, ActionsTypes } from './store';
+import { ActionsTypes } from './redux-store';
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
 let initialState = {
@@ -20,6 +20,21 @@ let initialState = {
       { id: 6, name: 'Luis' },
    ]
 }
+
+export type DialogsPageType = {
+  dialogs: Array<DialogsPropsType>;
+  messages: Array<MessagePropsType>;
+};
+
+export type DialogsPropsType = {
+  id: number;
+  name: string;
+ };
+
+ export type MessagePropsType = {
+  message: string;
+  id: number;
+};
 
 export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes) => {
 

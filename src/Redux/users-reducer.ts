@@ -1,7 +1,7 @@
 import { usersAPI } from './../api/Api';
 import React from 'react'
 import { Dispatch } from 'redux';
-import { ActionsTypes } from './store';
+import { ActionsTypes } from './redux-store';
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
